@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/USERNAME/favorite-songs-api/main/schema/songs.schema.json",
+  "title": "Favorite Songs & Karaoke Record API Schema",
+  "type": "object",
+  "required": ["schema_version", "updated_at", "songs"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "songs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/song" }
+    }
+  },
+  "$defs": {
+    "song": {
+      "type": "object",
+      "required": ["id", "title", "artist", "reason", "karaoke"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^song-\\d{3,}$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "artist": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string" },
+        "karaoke": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/karaoke_record" }
+        }
+      }
+    },
+    "karaoke_record": {
+      "type": "object",
+      "required": ["engine", "highest"],
+      "additionalProperties": false,
+      "properties": {
+        "engine": {
+          "type": "string",
+          "enum": [
+            "分析採点AI",
+            "精密採点DX-G",
+            "AI-EX",
+            "精密採点Ai",
+            "分析採点",
+            "採点J-POP"
+          ]
+        },
+        "highest": { "$ref": "#/$defs/score_with_details" }
+      }
+    },
+    "score_with_details": {
+      "type": "object",
+      "required": ["score"],
+      "additionalProperties": false,
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "details": { "$ref": "#/$defs/score_details" }
+      }
+    },
+    "score_details": {
+      "type": "object",
+      "required": ["pitch", "stability", "expression", "long_tone", "technique"],
+      "additionalProperties": false,
+      "properties": {
+        "pitch": { "$ref": "#/$defs/detail_score" },
+        "stability": { "$ref": "#/$defs/detail_score" },
+        "expression": { "$ref": "#/$defs/detail_score" },
+        "long_tone": { "$ref": "#/$defs/detail_score" },
+        "technique": { "$ref": "#/$defs/detail_score" }
+      }
+    },
+    "detail_score": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "number", "minimum": 0, "maximum": 100 }
+      ]
+    }
+  }
+}
