@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "updated_at": "2026-09-06T14:56:14+09:00",
+  "updated_at": "2026-09-07T06:27:09+09:00",
   "songs": [
     {
       "id": "song-001",
@@ -18,6 +18,27 @@
               "expression": 13.996,
               "long_tone": 7.195,
               "technique": 4.582
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "song-002",
+      "title": "Daisuke",
+      "artist": "Y&Co.",
+      "reason": "空耳が好き",
+      "karaoke": [
+        {
+          "engine": "分析採点AI",
+          "highest": {
+            "score": 85.998,
+            "details": {
+              "pitch": 34.36,
+              "stability": 25.102,
+              "expression": 13.8,
+              "long_tone": 6.916,
+              "technique": 4.8
             }
           }
         }
