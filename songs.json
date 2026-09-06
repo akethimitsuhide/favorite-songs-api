@@ -1,5 +1,27 @@
 {
   "schema_version": "2.0.0",
-  "updated_at": "2026-09-06T00:00:00+09:00",
-  "songs": []
+  "updated_at": "2026-09-06T14:56:14+09:00",
+  "songs": [
+    {
+      "id": "song-001",
+      "title": "君が代",
+      "artist": "国歌",
+      "reason": "愛国心ってやつです",
+      "karaoke": [
+        {
+          "engine": "分析採点AI",
+          "highest": {
+            "score": 90.078,
+            "details": {
+              "pitch": 35.103,
+              "stability": 29.115,
+              "expression": 13.996,
+              "long_tone": 7.195,
+              "technique": 4.582
+            }
+          }
+        }
+      ]
+    }
+  ]
 }
