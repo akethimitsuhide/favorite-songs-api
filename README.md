@@ -13,7 +13,7 @@
 ## 公開URL
 
 ```text
-https://raw.githubusercontent.com/USERNAME/favorite-songs-api/main/songs.json
+https://raw.githubusercontent.com/akethimitsuhide/favorite-songs-api/refs/heads/main/songs.json
 ```
 
 ※ `raw.githubusercontent.com` はCDNキャッシュがかかるため、
