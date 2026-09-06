@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "updated_at": "2026-09-07T06:27:09+09:00",
+  "updated_at": "2026-09-07T07:46:19+09:00",
   "songs": [
     {
       "id": "song-001",
@@ -39,6 +39,27 @@
               "expression": 13.8,
               "long_tone": 6.916,
               "technique": 4.8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "song-003",
+      "title": "HOT LIMIT",
+      "artist": "T.M.Revolution",
+      "reason": "夏をアツくしてくれるから",
+      "karaoke": [
+        {
+          "engine": "分析採点AI",
+          "highest": {
+            "score": 82.86,
+            "details": {
+              "pitch": 34.36,
+              "stability": 24.293,
+              "expression": 13.249,
+              "long_tone": 7.195,
+              "technique": 4.582
             }
           }
         }
