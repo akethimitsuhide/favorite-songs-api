@@ -13,7 +13,7 @@
 ## 公開URL
 
 ```text
-https://raw.githubusercontent.com/akethimitsuhide/favorite-songs-api/refs/heads/main/songs.json
+https://raw.githubusercontent.com/akethimitsuhide/favorite-songs-api/main/songs.json
 ```
 
 ※ `raw.githubusercontent.com` はCDNキャッシュがかかるため、
@@ -80,10 +80,31 @@ favorite-songs-api/
 
 Raspberry Pi OS等のLinux環境を想定。
 
+依存パッケージ（`jsonschema`）は、システムのPython環境を汚さないよう
+**このプロジェクト専用の仮想環境(venv)にインストールすることを推奨**します。
+
+### 初回セットアップ
+
 ```bash
-pip install jsonschema --break-system-packages
+cd favorite-songs-api
+python3 -m venv .venv
+source .venv/bin/activate
+pip install jsonschema
+```
+
+### 2回目以降の実行
+
+```bash
+cd favorite-songs-api
+source .venv/bin/activate
 python3 scripts/edit_songs.py
 ```
+
+作業が終わったら `deactivate` で仮想環境を抜けられます
+（抜けなくても実害はありません）。
+
+`jsonschema` が見つからない状態でスクリプトを実行した場合、
+上記のセットアップ手順が画面に案内として表示されます。
 
 メニューから「追加」「編集」「削除」を選択し、対話形式で入力する。
 保存時に自動でJSON Schemaによるバリデーションを行い、

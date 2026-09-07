@@ -3,7 +3,7 @@
 songs.json を対話形式で編集するCLIツール。
 
 想定実行環境: Raspberry Pi OS (Linux) / Python 3
-依存: jsonschema (pip install jsonschema --break-system-packages)
+依存: jsonschema（仮想環境の利用を推奨。詳細は起動時のエラーメッセージを参照）
      git コマンドがPATH上にあること（git add/commit/push に使用）
 
 操作: 追加 / 編集 / 削除 / 終了(保存) / 保存後にgit add・commit・push
@@ -21,8 +21,21 @@ try:
     import jsonschema
 except ImportError:
     print("エラー: jsonschema がインストールされていません。")
-    print("次のコマンドでインストールしてください:")
-    print("  pip install jsonschema --break-system-packages")
+    print()
+    print("システムのPython環境を直接変更する `--break-system-packages` は")
+    print("他のツールとの依存関係を壊す可能性があるため推奨しません。")
+    print("代わりに、このプロジェクト用の仮想環境(venv)を作成してください。")
+    print()
+    print("  cd " + str(Path(__file__).resolve().parent.parent))
+    print("  python3 -m venv .venv")
+    print("  source .venv/bin/activate")
+    print("  pip install jsonschema")
+    print()
+    print("以降は、仮想環境を有効化した状態で本スクリプトを実行してください:")
+    print("  source .venv/bin/activate")
+    print("  python3 scripts/edit_songs.py")
+    print()
+    print("(仮想環境を抜けるときは `deactivate` と入力してください)")
     sys.exit(1)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
