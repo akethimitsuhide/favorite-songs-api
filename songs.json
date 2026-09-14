@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "updated_at": "2026-09-07T07:46:19+09:00",
+  "updated_at": "2026-09-15T07:55:55+09:00",
   "songs": [
     {
       "id": "song-001",
@@ -60,6 +60,27 @@
               "expression": 13.249,
               "long_tone": 7.195,
               "technique": 4.582
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "song-004",
+      "title": "ウルトラトレーラー",
+      "artist": "マサラダ",
+      "reason": "自分を前に突き進めてくれた曲。嘲笑すらも迎えに行く 、という強い思いがかっこいい。普通に救われた。",
+      "karaoke": [
+        {
+          "engine": "分析採点AI",
+          "highest": {
+            "score": 85.486,
+            "details": {
+              "pitch": 32.792,
+              "stability": 24.324,
+              "expression": 13.514,
+              "long_tone": 9.342,
+              "technique": 4.5
             }
           }
         }
