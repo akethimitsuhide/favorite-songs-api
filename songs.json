@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "updated_at": "2026-10-12T06:59:28+09:00",
+  "updated_at": "2026-10-13T05:59:35+09:00",
   "songs": [
     {
       "id": "song-001",
@@ -81,6 +81,27 @@
               "expression": 13.655,
               "long_tone": 9.368,
               "technique": 4.493
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "song-005",
+      "title": "ライアーダンサー",
+      "artist": "マサラダ",
+      "reason": "自分の噓をついてしまう性格を肯定してくれているのてるから。",
+      "karaoke": [
+        {
+          "engine": "分析採点AI",
+          "highest": {
+            "score": 83.246,
+            "details": {
+              "pitch": 32.948,
+              "stability": 24.596,
+              "expression": 13.036,
+              "long_tone": 7.419,
+              "technique": 4.26
             }
           }
         }
