@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "updated_at": "2026-10-27T06:05:17+09:00",
+  "updated_at": "2026-10-27T06:11:19+09:00",
   "songs": [
     {
       "id": "song-001",
@@ -95,13 +95,13 @@
         {
           "engine": "分析採点AI",
           "highest": {
-            "score": 83.246,
+            "score": 85.6,
             "details": {
-              "pitch": 32.948,
-              "stability": 24.596,
-              "expression": 13.036,
-              "long_tone": 7.419,
-              "technique": 4.26
+              "pitch": 33.825,
+              "stability": 24.951,
+              "expression": 13.538,
+              "long_tone": 7.766,
+              "technique": 4.505
             }
           }
         }
