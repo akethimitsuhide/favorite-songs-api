@@ -17,6 +17,14 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Optional
 
+# readline を読み込むと input() が GNU readline 経由の行編集になり、
+# 日本語（マルチバイト文字）の Backspace・矢印キー編集が正しく動作する。
+# 未対応の環境（一部のWindows等）ではスキップする。
+try:
+    import readline  # noqa: F401
+except ImportError:
+    pass
+
 try:
     import jsonschema
 except ImportError:
@@ -55,6 +63,28 @@ DETAIL_FIELDS = [
     ("long_tone", "ロングトーン"),
     ("technique", "テクニック"),
 ]
+
+
+def safe_input(message: str) -> str:
+    """
+    input() の代わりに使う入力関数。
+
+    ターミナルによっては、日本語入力中の Backspace で文字ではなく
+    バイト単位の削除が起き、UTF-8として不正な行が渡されることがある。
+    その場合は UnicodeDecodeError でクラッシュせず、再入力を促す。
+    """
+    while True:
+        try:
+            value = input(message)
+            # 環境によっては不正なバイトが例外にならず、代替文字(U+FFFD)や
+            # 非UTF-8の文字として紛れ込む。保存時に失敗・文字化けするため弾く。
+            value.encode("utf-8")
+            if "\ufffd" in value:
+                raise UnicodeDecodeError("utf-8", b"", 0, 1, "replacement character")
+            return value
+        except (UnicodeDecodeError, UnicodeEncodeError):
+            print("\n  → 入力の文字コードが壊れました（日本語の削除操作が原因のことが多いです）。")
+            print("    お手数ですが、この項目をもう一度入力してください。")
 
 
 def load_json(path: Path) -> dict:
@@ -103,7 +133,7 @@ def next_id(data: dict) -> str:
 def prompt(label: str, default: str = None, allow_empty: bool = False) -> str:
     suffix = f" [{default}]" if default is not None else ""
     while True:
-        value = input(f"{label}{suffix}: ").strip()
+        value = safe_input(f"{label}{suffix}: ").strip()
         if not value and default is not None:
             return default
         if not value and allow_empty:
@@ -115,7 +145,7 @@ def prompt(label: str, default: str = None, allow_empty: bool = False) -> str:
 
 def prompt_score(label: str) -> float:
     while True:
-        raw = input(f"{label} (0-100の数値): ").strip()
+        raw = safe_input(f"{label} (0-100の数値): ").strip()
         try:
             value = float(raw)
         except ValueError:
@@ -130,7 +160,7 @@ def prompt_score(label: str) -> float:
 def prompt_optional_score(label: str) -> Optional[float]:
     """空Enterならスキップ(None)を許す点数入力。"""
     while True:
-        raw = input(f"    {label} (0-100の数値 / 不明なら空Enter): ").strip()
+        raw = safe_input(f"    {label} (0-100の数値 / 不明なら空Enter): ").strip()
         if not raw:
             return None
         try:
@@ -163,7 +193,7 @@ def input_score_details(existing: dict = None) -> dict:
 
 def prompt_yes_no(label: str, default_no: bool = True) -> bool:
     suffix = "(y/N)" if default_no else "(Y/n)"
-    raw = input(f"{label} {suffix}: ").strip().lower()
+    raw = safe_input(f"{label} {suffix}: ").strip().lower()
     if not raw:
         return not default_no
     return raw in ("y", "yes")
@@ -185,7 +215,7 @@ def input_karaoke_records(existing: list = None) -> list:
     while True:
         is_first = not records
         label = "採点エンジン名"
-        raw = input(f"{label} [{DEFAULT_ENGINE if is_first else ''}]: ").strip()
+        raw = safe_input(f"{label} [{DEFAULT_ENGINE if is_first else ''}]: ").strip()
 
         if is_first and raw == "-":
             # 採点記録なしで終了
@@ -222,7 +252,6 @@ def input_karaoke_records(existing: list = None) -> list:
 
         if not prompt_yes_no("他にも採点記録がありますか？"):
             break
-        first_default = None  # 2件目以降はデフォルト提案しない
 
     return records
 
@@ -263,7 +292,7 @@ def select_song(data: dict):
         print("(登録曲はまだありません)")
         return None
     list_songs(data)
-    raw = input("番号を選択してください（キャンセルは空Enter）: ").strip()
+    raw = safe_input("番号を選択してください（キャンセルは空Enter）: ").strip()
     if not raw:
         return None
     if not raw.isdigit() or not (1 <= int(raw) <= len(songs)):
@@ -381,7 +410,7 @@ def main():
         print("4. 一覧表示")
         print("5. 保存して終了")
         print("6. 保存せず終了")
-        choice = input("選択してください: ").strip()
+        choice = safe_input("選択してください: ").strip()
 
         if choice == "1":
             add_song(data)
@@ -416,4 +445,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (KeyboardInterrupt, EOFError):
+        # Ctrl+C / Ctrl+D での中断時にトレースバックを出さず、保存されていないことを明示する
+        print("\n\n中断しました（未保存の変更は破棄されました）。")
+        sys.exit(130)
