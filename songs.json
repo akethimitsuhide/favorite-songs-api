@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "updated_at": "2026-10-27T06:11:19+09:00",
+  "updated_at": "2026-10-30T06:24:57+09:00",
   "songs": [
     {
       "id": "song-001",
@@ -102,6 +102,27 @@
               "expression": 13.538,
               "long_tone": 7.766,
               "technique": 4.505
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "song-006",
+      "title": "オーバーライド",
+      "artist": "吉田夜世",
+      "reason": "かなり共感した（小並感）",
+      "karaoke": [
+        {
+          "engine": "分析採点AI",
+          "highest": {
+            "score": 85.553,
+            "details": {
+              "pitch": 32.859,
+              "stability": 24.761,
+              "expression": 13.076,
+              "long_tone": 9.568,
+              "technique": 4.275
             }
           }
         }
