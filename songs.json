@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "updated_at": "2026-10-30T06:24:57+09:00",
+  "updated_at": "2026-10-31T10:05:09+09:00",
   "songs": [
     {
       "id": "song-001",
@@ -123,6 +123,27 @@
               "expression": 13.076,
               "long_tone": 9.568,
               "technique": 4.275
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "song-007",
+      "title": "ちっちゃな私",
+      "artist": "マサラダ",
+      "reason": "歌詞に感動した。神曲。",
+      "karaoke": [
+        {
+          "engine": "分析採点AI",
+          "highest": {
+            "score": 90.029,
+            "details": {
+              "pitch": 34.494,
+              "stability": 27.341,
+              "expression": 13.907,
+              "long_tone": 7.795,
+              "technique": 4.37
             }
           }
         }
